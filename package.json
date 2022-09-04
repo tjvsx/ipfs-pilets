@@ -1,0 +1,20 @@
+{
+  "name": "ipfs-pilets",
+  "version": "1.0.0",
+  "description": "publish pilets to ipfs",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "push": "node scripts/push.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tjvsx/ipfs-pilets.git"
+  },
+  "author": "tjvsx",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tjvsx/ipfs-pilets/issues"
+  },
+  "homepage": "https://github.com/tjvsx/ipfs-pilets#readme"
+}
