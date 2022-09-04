@@ -7,7 +7,7 @@ async function main(buildFile: fs.PathOrFileDescriptor) {
   const file = Readable.from(buffer);
 
   const { create } = await import('ipfs-http-client')
-  const ipfs = create({url: `http:localhost:5005/api/v0`});
+  const ipfs = create({url: `http:localhost:5001/api/v0`});
   
   const pilet = await getPiletDefinition(file, ipfs);
   console.log(`💎 pushing ${pilet.meta.name} to ipfs...`)

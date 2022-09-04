@@ -50,7 +50,7 @@ function main(buildFile) {
                     return [4 /*yield*/, import('ipfs-http-client')];
                 case 1:
                     create = (_a.sent()).create;
-                    ipfs = create({ url: "http:localhost:5005/api/v0" });
+                    ipfs = create({ url: "http:localhost:5001/api/v0" });
                     return [4 /*yield*/, (0, helpers_1.getPiletDefinition)(file, ipfs)];
                 case 2:
                     pilet = _a.sent();
