@@ -90,7 +90,7 @@ function generateLinks(data, files, ipfs) {
                                     if (!!filename.match(/(\w*)\.tgz$/)) return [3 /*break*/, 2];
                                     content = getContent(file, files);
                                     if (!(content.length > 0)) return [3 /*break*/, 2];
-                                    return [4 /*yield*/, ipfs.files.write("/pilets/".concat(name, "/").concat(version, "/").concat(filename), content, { create: true })];
+                                    return [4 /*yield*/, ipfs.files.write("/pilets/".concat(name, "/").concat(version, "/").concat(filename), content /* , {create: true} */)];
                                 case 1:
                                     _a.sent();
                                     _a.label = 2;

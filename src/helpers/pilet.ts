@@ -34,13 +34,15 @@ export async function generateLinks(data: PackageData, files: PackageFiles, ipfs
     await ipfs.files.mkdir(`/pilets/${name}/${version}`, {parents: true})
   }
 
+  
+
   const arr = Array.from(Object.keys(files))
   arr.forEach(async (file, index) => {
     const filename = file.replace(/^.*[\\\/]/, '')
     if (!filename.match(/(\w*)\.tgz$/)) {
       const content = getContent(file, files)
       if ( content.length > 0 ) {
-        await ipfs.files.write(`/pilets/${name}/${version}/${filename}`, content, {create: true});
+        await ipfs.files.write(`/pilets/${name}/${version}/${filename}`, content/* , {create: true} */);
       }
     }
   })
