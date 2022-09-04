@@ -29,6 +29,8 @@ This will publish the files into a hash-linked ipfs folder like:
       * build files (index.js, .css, etc)
 
 
+### Extra details:
+
 PiletMetadata types:
 ```
 interface PiletApiResponse {
