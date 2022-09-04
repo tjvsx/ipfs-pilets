@@ -29,9 +29,9 @@ export async function generateLinks(data: PackageData, files: PackageFiles, ipfs
   const version = data.preview ? `${data.version}-pre.${iter++}` : data.version;
 
   try {
-    await ipfs.files.stat(`/files/${name}/${version}`)
+    await ipfs.files.stat(`/pilets/${name}/${version}`)
   } catch {
-    await ipfs.files.mkdir(`/files/${name}/${version}`, {parents: true})
+    await ipfs.files.mkdir(`/pilets/${name}/${version}`, {parents: true})
   }
 
   const arr = Array.from(Object.keys(files))
@@ -40,12 +40,12 @@ export async function generateLinks(data: PackageData, files: PackageFiles, ipfs
     if (!filename.match(/(\w*)\.tgz$/)) {
       const content = getContent(file, files)
       if ( content.length > 0 ) {
-        await ipfs.files.write(`/files/${name}/${version}/${filename}`, content, {create: true});
+        await ipfs.files.write(`/pilets/${name}/${version}/${filename}`, content, {create: true});
       }
     }
   })
 
-  const { cid } = await ipfs.files.stat(`/files/${name}/${version}`)
+  const { cid } = await ipfs.files.stat(`/pilets/${name}/${version}`)
 
   return `${cid.toString()}/index.js`
 }

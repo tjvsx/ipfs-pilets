@@ -69,13 +69,13 @@ function generateLinks(data, files, ipfs) {
                     _b.label = 1;
                 case 1:
                     _b.trys.push([1, 3, , 5]);
-                    return [4 /*yield*/, ipfs.files.stat("/files/".concat(name, "/").concat(version))];
+                    return [4 /*yield*/, ipfs.files.stat("/pilets/".concat(name, "/").concat(version))];
                 case 2:
                     _b.sent();
                     return [3 /*break*/, 5];
                 case 3:
                     _a = _b.sent();
-                    return [4 /*yield*/, ipfs.files.mkdir("/files/".concat(name, "/").concat(version), { parents: true })];
+                    return [4 /*yield*/, ipfs.files.mkdir("/pilets/".concat(name, "/").concat(version), { parents: true })];
                 case 4:
                     _b.sent();
                     return [3 /*break*/, 5];
@@ -90,7 +90,7 @@ function generateLinks(data, files, ipfs) {
                                     if (!!filename.match(/(\w*)\.tgz$/)) return [3 /*break*/, 2];
                                     content = getContent(file, files);
                                     if (!(content.length > 0)) return [3 /*break*/, 2];
-                                    return [4 /*yield*/, ipfs.files.write("/files/".concat(name, "/").concat(version, "/").concat(filename), content, { create: true })];
+                                    return [4 /*yield*/, ipfs.files.write("/pilets/".concat(name, "/").concat(version, "/").concat(filename), content, { create: true })];
                                 case 1:
                                     _a.sent();
                                     _a.label = 2;
@@ -98,7 +98,7 @@ function generateLinks(data, files, ipfs) {
                             }
                         });
                     }); });
-                    return [4 /*yield*/, ipfs.files.stat("/files/".concat(name, "/").concat(version))];
+                    return [4 /*yield*/, ipfs.files.stat("/pilets/".concat(name, "/").concat(version))];
                 case 6:
                     cid = (_b.sent()).cid;
                     return [2 /*return*/, "".concat(cid.toString(), "/index.js")];
