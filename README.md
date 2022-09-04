@@ -1,6 +1,6 @@
 # Store Pilets on IPFS
 
-> NOTE: you must be running IPFS desktop and its 'API' port should be set to 5001
+> NOTE: you must be running [IPFS Desktop](https://ipfs.tech/#install) and its 'API' port should be set to 5001
 
 ### Example usage:
 ```
