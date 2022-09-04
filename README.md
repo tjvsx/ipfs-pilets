@@ -1,5 +1,7 @@
 # Store Pilets on IPFS
 
+> NOTE: you must be running IPFS desktop and its 'API' port should be set to 5001
+
 ### Example usage:
 ```
 yarn ipfs-pilets-push <build-file-path>
