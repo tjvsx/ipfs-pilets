@@ -206,30 +206,34 @@ function extractPiletMetadata(data, main, file, files, link) {
 }
 exports.extractPiletMetadata = extractPiletMetadata;
 function getPiletDefinition(stream, node) {
-    var _this = this;
-    return (0, untar_1.untar)(stream).then(function (files) { return __awaiter(_this, void 0, void 0, function () {
-        var data, path, root, file, main, link, meta;
+    return __awaiter(this, void 0, void 0, function () {
+        var _this = this;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    data = getPackageJson(files);
-                    path = getPiletMainPath(data, files);
-                    root = (0, path_1.dirname)(path);
-                    file = (0, path_1.basename)(path);
-                    main = getContent(path, files);
-                    return [4 /*yield*/, generateLinks(data, files, node)];
-                case 1:
-                    link = _a.sent();
-                    return [4 /*yield*/, extractPiletMetadata(data, main, file, files, link)];
-                case 2:
-                    meta = _a.sent();
-                    return [2 /*return*/, {
-                            meta: meta,
-                            root: root,
-                            files: files
-                        }];
-            }
+            return [2 /*return*/, (0, untar_1.untar)(stream).then(function (files) { return __awaiter(_this, void 0, void 0, function () {
+                    var data, path, root, file, main, link, meta;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                data = getPackageJson(files);
+                                path = getPiletMainPath(data, files);
+                                root = (0, path_1.dirname)(path);
+                                file = (0, path_1.basename)(path);
+                                main = getContent(path, files);
+                                return [4 /*yield*/, generateLinks(data, files, node)];
+                            case 1:
+                                link = _a.sent();
+                                return [4 /*yield*/, extractPiletMetadata(data, main, file, files, link)];
+                            case 2:
+                                meta = _a.sent();
+                                return [2 /*return*/, {
+                                        meta: meta,
+                                        root: root,
+                                        files: files
+                                    }];
+                        }
+                    });
+                }); })];
         });
-    }); });
+    });
 }
 exports.getPiletDefinition = getPiletDefinition;

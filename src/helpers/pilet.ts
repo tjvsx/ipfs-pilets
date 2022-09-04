@@ -155,7 +155,7 @@ export async function extractPiletMetadata(
   }
 }
 
-export function getPiletDefinition(stream: NodeJS.ReadableStream, node: IPFSHTTPClient): Promise<Pilet> {
+export async function getPiletDefinition(stream: NodeJS.ReadableStream, node: IPFSHTTPClient): Promise<Pilet> {
   return untar(stream).then(async files => {
     const data = getPackageJson(files);
     const path = getPiletMainPath(data, files);
