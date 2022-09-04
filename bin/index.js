@@ -47,7 +47,7 @@ function main(buildFile) {
                 case 0:
                     buffer = fs.readFileSync(buildFile);
                     file = Readable.from(buffer);
-                    return [4 /*yield*/, Promise.resolve().then(function () { return require('ipfs-http-client'); })];
+                    return [4 /*yield*/, import('ipfs-http-client')];
                 case 1:
                     create = (_a.sent()).create;
                     ipfs = create({ url: "http:localhost:5005/api/v0" });
