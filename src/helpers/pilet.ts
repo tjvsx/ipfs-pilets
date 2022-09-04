@@ -23,6 +23,19 @@ export function getContent(path: string, files: PackageFiles) {
   return content && content.toString('utf8');
 }
 
+async function writeFiles(files, ipfs, name, version) {
+  const arr = Array.from(Object.keys(files))
+  arr.forEach(async (file, index) => {
+    const filename = file.replace(/^.*[\\\/]/, '')
+    if (!filename.match(/(\w*)\.tgz$/)) {
+      const content = getContent(file, files)
+      if ( content.length > 0 ) {
+        await ipfs.files.write(`/pilets/${name}/${version}/${filename}`, content, {create: true});
+      }
+    }
+  })
+}
+
 export async function generateLinks(data: PackageData, files: PackageFiles, ipfs: IPFSHTTPClient) {
 
   const name = data.name;
@@ -34,18 +47,8 @@ export async function generateLinks(data: PackageData, files: PackageFiles, ipfs
     await ipfs.files.mkdir(`/pilets/${name}/${version}`, {parents: true})
   }
 
-  
 
-  const arr = Array.from(Object.keys(files))
-  arr.forEach(async (file, index) => {
-    const filename = file.replace(/^.*[\\\/]/, '')
-    if (!filename.match(/(\w*)\.tgz$/)) {
-      const content = getContent(file, files)
-      if ( content.length > 0 ) {
-        await ipfs.files.write(`/pilets/${name}/${version}/${filename}`, content/* , {create: true} */);
-      }
-    }
-  })
+  await writeFiles(files, ipfs, name, version);
 
   const { cid } = await ipfs.files.stat(`/pilets/${name}/${version}`)
 

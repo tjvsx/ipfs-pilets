@@ -57,10 +57,36 @@ function getContent(path, files) {
     return content && content.toString('utf8');
 }
 exports.getContent = getContent;
+function writeFiles(files, ipfs, name, version) {
+    return __awaiter(this, void 0, void 0, function () {
+        var arr;
+        var _this = this;
+        return __generator(this, function (_a) {
+            arr = Array.from(Object.keys(files));
+            arr.forEach(function (file, index) { return __awaiter(_this, void 0, void 0, function () {
+                var filename, content;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            filename = file.replace(/^.*[\\\/]/, '');
+                            if (!!filename.match(/(\w*)\.tgz$/)) return [3 /*break*/, 2];
+                            content = getContent(file, files);
+                            if (!(content.length > 0)) return [3 /*break*/, 2];
+                            return [4 /*yield*/, ipfs.files.write("/pilets/".concat(name, "/").concat(version, "/").concat(filename), content, { create: true })];
+                        case 1:
+                            _a.sent();
+                            _a.label = 2;
+                        case 2: return [2 /*return*/];
+                    }
+                });
+            }); });
+            return [2 /*return*/];
+        });
+    });
+}
 function generateLinks(data, files, ipfs) {
     return __awaiter(this, void 0, void 0, function () {
-        var name, version, _a, arr, cid;
-        var _this = this;
+        var name, version, _a, cid;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -79,27 +105,11 @@ function generateLinks(data, files, ipfs) {
                 case 4:
                     _b.sent();
                     return [3 /*break*/, 5];
-                case 5:
-                    arr = Array.from(Object.keys(files));
-                    arr.forEach(function (file, index) { return __awaiter(_this, void 0, void 0, function () {
-                        var filename, content;
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0:
-                                    filename = file.replace(/^.*[\\\/]/, '');
-                                    if (!!filename.match(/(\w*)\.tgz$/)) return [3 /*break*/, 2];
-                                    content = getContent(file, files);
-                                    if (!(content.length > 0)) return [3 /*break*/, 2];
-                                    return [4 /*yield*/, ipfs.files.write("/pilets/".concat(name, "/").concat(version, "/").concat(filename), content /* , {create: true} */)];
-                                case 1:
-                                    _a.sent();
-                                    _a.label = 2;
-                                case 2: return [2 /*return*/];
-                            }
-                        });
-                    }); });
-                    return [4 /*yield*/, ipfs.files.stat("/pilets/".concat(name, "/").concat(version))];
+                case 5: return [4 /*yield*/, writeFiles(files, ipfs, name, version)];
                 case 6:
+                    _b.sent();
+                    return [4 /*yield*/, ipfs.files.stat("/pilets/".concat(name, "/").concat(version))];
+                case 7:
                     cid = (_b.sent()).cid;
                     return [2 /*return*/, "".concat(cid.toString(), "/index.js")];
             }
