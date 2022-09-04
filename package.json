@@ -2,7 +2,13 @@
   "name": "ipfs-pilets",
   "version": "1.0.0",
   "description": "publish pilets to ipfs",
-  "main": "index.js",
+  "files": [
+    "dist",
+    "src",
+    "bin"
+  ],
+  "main": "dist/cjs/src/index.js",
+  "module": "dist/esm/src/index.js",
   "scripts": {
     "build": "yarn run build:esm && yarn run build:cjs && yarn build:cli",
     "build:esm": "tsc --module es2020 --target es2017 --outDir dist/esm",
@@ -40,5 +46,8 @@
     "tslib": "2.4.0",
     "typescript": "latest",
     "zlib": "^1.0.5"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
