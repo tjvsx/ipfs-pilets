@@ -6,7 +6,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "strict": true,
     // project options
     "outDir": "dist",
     "allowJs": true,
