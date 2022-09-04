@@ -16,7 +16,7 @@ rm -rf ./dist && pilet build && pilet pack --target ./dist
 yarn ipfs-pilets-push ./dist/counter-1.0.1.tgz
 ```
 
-This will push the files into a hash-linked folder like:
+This will publish the files into a hash-linked ipfs folder like:
 
 * IPFS CID `Qm..`
   * PiletMetadata object
