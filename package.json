@@ -4,8 +4,17 @@
   "description": "publish pilets to ipfs",
   "main": "index.js",
   "scripts": {
-    "test": "test",
-    "push": "node scripts/push.ts"
+    "build": "yarn run build:esm && yarn run build:cjs",
+    "build:esm": "tsc --module es2020 --target es2017 --outDir dist/esm",
+    "build:cjs": "tsc --outDir dist/cjs",
+    "test": "TS_NODE_PROJECT=./tsconfig.test.json mocha",
+    "lint": "yarn lint:prettier --check && yarn lint:eslint",
+    "lint:fix": "yarn lint:prettier --write && yarn lint:eslint --fix",
+    "lint:eslint": "eslint './{src,test}/**/*.{ts,tsx}'",
+    "lint:prettier": "yarn prettier './{src,test}/**/*.{ts,tsx}'"
+  },
+  "bin": {
+    "ipfs-pilets-push": "./bin/index.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +25,18 @@
   "bugs": {
     "url": "https://github.com/tjvsx/ipfs-pilets/issues"
   },
-  "homepage": "https://github.com/tjvsx/ipfs-pilets#readme"
+  "homepage": "https://github.com/tjvsx/ipfs-pilets#readme",
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/tar": "^6.1.2",
+    "axios": "^0.27.2",
+    "ipfs-core": "^0.15.4",
+    "ipfs-http-client": "^56.0.3",
+    "path-to-regexp": "2.4.0",
+    "tar": "^6.1.11",
+    "ts-node": "^10.9.1",
+    "tslib": "2.4.0",
+    "typescript": "latest",
+    "zlib": "^1.0.5"
+  }
 }
