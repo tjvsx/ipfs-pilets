@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import * as fs from 'fs'
 const { Readable } = require('stream');
 import { getPiletDefinition } from './helpers';
