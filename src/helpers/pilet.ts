@@ -25,15 +25,16 @@ export function getContent(path: string, files: PackageFiles) {
 
 async function writeFiles(files, ipfs, name, version) {
   const arr = Array.from(Object.keys(files))
-  arr.forEach(async (file, index) => {
+  for await (const file of arr) {
     const filename = file.replace(/^.*[\\\/]/, '')
     if (!filename.match(/(\w*)\.tgz$/)) {
       const content = getContent(file, files)
       if ( content.length > 0 ) {
+        console.log(`${filename} is ${content.length} chars long`)
         await ipfs.files.write(`/pilets/${name}/${version}/${filename}`, content, {create: true});
       }
     }
-  })
+  }
 }
 
 export async function generateLinks(data: PackageData, files: PackageFiles, ipfs: IPFSHTTPClient) {
@@ -47,10 +48,11 @@ export async function generateLinks(data: PackageData, files: PackageFiles, ipfs
     await ipfs.files.mkdir(`/pilets/${name}/${version}`, {parents: true})
   }
 
-
   await writeFiles(files, ipfs, name, version);
 
   const { cid } = await ipfs.files.stat(`/pilets/${name}/${version}`)
+
+  console.log('generated links at', cid);
 
   return `${cid.toString()}/index.js`
 }

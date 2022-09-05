@@ -35,6 +35,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __asyncValues = (this && this.__asyncValues) || function (o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+};
 exports.__esModule = true;
 exports.getPiletDefinition = exports.extractPiletMetadata = exports.generateLinks = exports.getContent = void 0;
 var path_1 = require("path");
@@ -58,29 +65,51 @@ function getContent(path, files) {
 }
 exports.getContent = getContent;
 function writeFiles(files, ipfs, name, version) {
+    var e_1, _a;
     return __awaiter(this, void 0, void 0, function () {
-        var arr;
-        var _this = this;
-        return __generator(this, function (_a) {
-            arr = Array.from(Object.keys(files));
-            arr.forEach(function (file, index) { return __awaiter(_this, void 0, void 0, function () {
-                var filename, content;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            filename = file.replace(/^.*[\\\/]/, '');
-                            if (!!filename.match(/(\w*)\.tgz$/)) return [3 /*break*/, 2];
-                            content = getContent(file, files);
-                            if (!(content.length > 0)) return [3 /*break*/, 2];
-                            return [4 /*yield*/, ipfs.files.write("/pilets/".concat(name, "/").concat(version, "/").concat(filename), content, { create: true })];
-                        case 1:
-                            _a.sent();
-                            _a.label = 2;
-                        case 2: return [2 /*return*/];
-                    }
-                });
-            }); });
-            return [2 /*return*/];
+        var arr, arr_1, arr_1_1, file, filename, content, e_1_1;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    arr = Array.from(Object.keys(files));
+                    _b.label = 1;
+                case 1:
+                    _b.trys.push([1, 7, 8, 13]);
+                    arr_1 = __asyncValues(arr);
+                    _b.label = 2;
+                case 2: return [4 /*yield*/, arr_1.next()];
+                case 3:
+                    if (!(arr_1_1 = _b.sent(), !arr_1_1.done)) return [3 /*break*/, 6];
+                    file = arr_1_1.value;
+                    filename = file.replace(/^.*[\\\/]/, '');
+                    if (!!filename.match(/(\w*)\.tgz$/)) return [3 /*break*/, 5];
+                    content = getContent(file, files);
+                    if (!(content.length > 0)) return [3 /*break*/, 5];
+                    console.log("".concat(filename, " is ").concat(content.length, " chars long"));
+                    return [4 /*yield*/, ipfs.files.write("/pilets/".concat(name, "/").concat(version, "/").concat(filename), content, { create: true })];
+                case 4:
+                    _b.sent();
+                    _b.label = 5;
+                case 5: return [3 /*break*/, 2];
+                case 6: return [3 /*break*/, 13];
+                case 7:
+                    e_1_1 = _b.sent();
+                    e_1 = { error: e_1_1 };
+                    return [3 /*break*/, 13];
+                case 8:
+                    _b.trys.push([8, , 11, 12]);
+                    if (!(arr_1_1 && !arr_1_1.done && (_a = arr_1["return"]))) return [3 /*break*/, 10];
+                    return [4 /*yield*/, _a.call(arr_1)];
+                case 9:
+                    _b.sent();
+                    _b.label = 10;
+                case 10: return [3 /*break*/, 12];
+                case 11:
+                    if (e_1) throw e_1.error;
+                    return [7 /*endfinally*/];
+                case 12: return [7 /*endfinally*/];
+                case 13: return [2 /*return*/];
+            }
         });
     });
 }
@@ -111,6 +140,7 @@ function generateLinks(data, files, ipfs) {
                     return [4 /*yield*/, ipfs.files.stat("/pilets/".concat(name, "/").concat(version))];
                 case 7:
                     cid = (_b.sent()).cid;
+                    console.log('generated links at', cid);
                     return [2 /*return*/, "".concat(cid.toString(), "/index.js")];
             }
         });
