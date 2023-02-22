@@ -37,30 +37,31 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var fs = require("fs");
-var Readable = require('stream').Readable;
-var helpers_1 = require("./helpers");
+var push_1 = require("./push");
+console.log('EXPERIMENTAL: UseDApp automatic hook generation tool');
+var usage = function () {
+    console.log("\n  Usage:\n\n  WEB3STORAGE_TOKEN=<destination directory>   BUILD_FILE_PATH=<build file path>   usedapp-generate-hooks\n  ");
+};
+if (!process.env.WEB3STORAGE_TOKEN) {
+    usage();
+    process.exit(-1);
+}
 function main(buildFile) {
     return __awaiter(this, void 0, void 0, function () {
-        var buffer, file, create, ipfs, pilet, cid;
+        var e_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    buffer = fs.readFileSync(buildFile);
-                    file = Readable.from(buffer);
-                    return [4 /*yield*/, import('ipfs-http-client')];
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, (0, push_1.push)(buildFile)];
                 case 1:
-                    create = (_a.sent()).create;
-                    ipfs = create({ url: "http:localhost:5001/api/v0" });
-                    return [4 /*yield*/, (0, helpers_1.getPiletDefinition)(file, ipfs)];
+                    _a.sent();
+                    return [3 /*break*/, 3];
                 case 2:
-                    pilet = _a.sent();
-                    console.log("\uD83D\uDC8E pushing ".concat(pilet.meta.name, " to ipfs..."));
-                    return [4 /*yield*/, ipfs.add(JSON.stringify(pilet))];
-                case 3:
-                    cid = (_a.sent()).cid;
-                    console.info(cid);
-                    return [2 /*return*/];
+                    e_1 = _a.sent();
+                    console.error(e_1);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });

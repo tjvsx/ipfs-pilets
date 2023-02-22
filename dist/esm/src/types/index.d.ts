@@ -38,6 +38,7 @@ export interface PiletMetadataBase {
         type: string;
         text: string;
     };
+    spec: string;
 }
 export declare type PiletMetadata = (PiletMetadataV0 | PiletMetadataV1 | PiletMetadataV2 | PiletMetadataVx) & PiletMetadataBase;
 export interface Pilet {
