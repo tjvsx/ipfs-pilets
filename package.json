@@ -1,7 +1,7 @@
 {
-  "name": "ipfs-pilets",
+  "name": "dapplet-push-w3s",
   "version": "1.0.0",
-  "description": "publish pilets to ipfs",
+  "description": "publish dapplets to ipfs",
   "files": [
     "dist",
     "src",
@@ -21,7 +21,7 @@
     "lint:prettier": "yarn prettier './{src,test}/**/*.{ts,tsx}'"
   },
   "bin": {
-    "ipfs-pilets-push": "./bin/index.js"
+    "dapplet-push": "./bin/index.js"
   },
   "repository": {
     "type": "git",
