@@ -121,12 +121,22 @@ export interface PiletMetadataBase {
     type: string;
     text: string;
   };
+  /**
+   * The spec version of the pilet.
+   */
+  spec: string;
 }
 
 /**
  * Describes the metadata transported by a pilet.
  */
-export type PiletMetadata = (PiletMetadataV0 | PiletMetadataV1 | PiletMetadataV2 | PiletMetadataVx) & PiletMetadataBase;
+export type PiletMetadata = (
+  | PiletMetadataV0
+  | PiletMetadataV1
+  | PiletMetadataV2
+  | PiletMetadataVx
+) &
+  PiletMetadataBase;
 
 export interface Pilet {
   meta: PiletMetadata;

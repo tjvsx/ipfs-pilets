@@ -1,22 +1,31 @@
 #!/usr/bin/env node
+import * as fs from 'fs';
+import { push } from './push';
 
-import * as fs from 'fs'
-const { Readable } = require('stream');
-import { getPiletDefinition } from './helpers';
+console.log('EXPERIMENTAL: UseDApp automatic hook generation tool');
 
-async function main(buildFile: fs.PathOrFileDescriptor) {
-  const buffer = fs.readFileSync(buildFile)
-  const file = Readable.from(buffer);
+const usage = () => {
+  console.log(`
+  Usage:
 
-  const { create } = await import('ipfs-http-client')
-  const ipfs = create({url: `http:localhost:5001/api/v0`});
-  
-  const pilet = await getPiletDefinition(file, ipfs);
-  console.log(`💎 pushing ${pilet.meta.name} to ipfs...`)
-  
-  const { cid } = await ipfs.add(JSON.stringify(pilet))
-  console.info(cid)
+  WEB3STORAGE_TOKEN=<destination directory> \
+  BUILD_FILE_PATH=<build file path> \
+  usedapp-generate-hooks
+  `);
+};
+
+if (!process.env.WEB3STORAGE_TOKEN) {
+  usage();
+  process.exit(-1);
 }
 
-var args = process.argv.slice(2)
+async function main(buildFile: fs.PathOrFileDescriptor) {
+  try {
+    await push(buildFile);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+var args = process.argv.slice(2);
 main(args[0]);
