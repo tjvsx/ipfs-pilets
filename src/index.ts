@@ -1,16 +1,13 @@
 #!/usr/bin/env node
-import * as fs from 'fs';
-import { push } from './push';
-
-console.log('EXPERIMENTAL: UseDApp automatic hook generation tool');
+import * as fs from "fs";
+import { push } from "./push";
 
 const usage = () => {
   console.log(`
   Usage:
 
   WEB3STORAGE_TOKEN=<destination directory> \
-  BUILD_FILE_PATH=<build file path> \
-  usedapp-generate-hooks
+  usedapp-generate-hooks ./dist/<build file>
   `);
 };
 
