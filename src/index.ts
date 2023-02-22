@@ -6,7 +6,7 @@ const usage = () => {
   console.log(`
   Usage:
 
-  WEB3STORAGE_TOKEN=<destination directory> \
+  WEB3STORAGE_TOKEN=<your storage token from https://web3.storage, if its not already in your .env file> \
   usedapp-generate-hooks ./dist/<build file>
   `);
 };
