@@ -38,9 +38,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var push_1 = require("./push");
-console.log('EXPERIMENTAL: UseDApp automatic hook generation tool');
 var usage = function () {
-    console.log("\n  Usage:\n\n  WEB3STORAGE_TOKEN=<destination directory>   BUILD_FILE_PATH=<build file path>   usedapp-generate-hooks\n  ");
+    console.log("\n  Usage:\n\n  WEB3STORAGE_TOKEN=<destination directory>   usedapp-generate-hooks ./dist/<build file>\n  ");
 };
 if (!process.env.WEB3STORAGE_TOKEN) {
     usage();
