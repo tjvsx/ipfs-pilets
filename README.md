@@ -1,10 +1,5 @@
 # Store Dapplets on IPFS
 
-> WIP
-
-> NOTE: you must be running [IPFS Desktop](https://ipfs.tech/#install) and its 'API' port should be set to 5001
-> <img width="319" alt="Screen Shot 2022-09-04 at 5 30 55 PM" src="https://user-images.githubusercontent.com/62122206/188334323-4f8d82a8-c4b1-43c1-9d3a-c2911ec77168.png">
-
 ### Example usage:
 
 ```
